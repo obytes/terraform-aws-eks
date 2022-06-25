@@ -2,7 +2,7 @@
 # VPC
 ####################
 module "vpc" {
-  source                  = "github.com/obytes/terraform-aws-vpc.git?ref=v1.0.3"
+  source                  = "github.com/obytes/terraform-aws-vpc.git?ref=v1.0.5"
   environment             = var.environment
   region                  = var.region
   project_name            = var.project_name
@@ -15,7 +15,7 @@ module "vpc" {
   map_public_ip_on_lunch  = true
   additional_public_subnet_tags = {
     "kubernetes.io/cluster/${join("-", [local.prefix, "backend"])}" = "shared"
-    "kubernetes.io/role/elb"                         = 1
+    "kubernetes.io/role/elb"                                        = 1
   }
   additional_private_subnet_tags = {
   }
@@ -27,7 +27,7 @@ module "vpc" {
 ####################
 resource "aws_ecr_repository" "this" {
   count = var.create_ecr_repository ? 1 : 0
-  name = local.prefix
+  name  = local.prefix
 
   image_scanning_configuration {
     scan_on_push = true
@@ -35,7 +35,7 @@ resource "aws_ecr_repository" "this" {
 }
 
 resource "aws_ecr_lifecycle_policy" "this" {
-  count = var.create_ecr_repository ? 1 : 0
+  count      = var.create_ecr_repository ? 1 : 0
   repository = aws_ecr_repository.this[count.index].name
 
   policy = <<EOF
@@ -120,7 +120,7 @@ EOF
 ####################
 
 resource "aws_kms_key" "_" {
-  count = var.create_kms_key ? 1 : 0
+  count                   = var.create_kms_key ? 1 : 0
   description             = "AWS KMS for ${local.prefix}"
   is_enabled              = true
   deletion_window_in_days = 7
@@ -129,7 +129,7 @@ resource "aws_kms_key" "_" {
 }
 
 resource "aws_kms_alias" "_" {
-  count = var.create_kms_key ? 1 : 0
+  count         = var.create_kms_key ? 1 : 0
   target_key_id = aws_kms_key._[count.index].id
   name          = "alias/${local.prefix}"
 }
@@ -227,7 +227,7 @@ data "aws_iam_policy_document" "kms_policy" {
 ####################
 
 resource "aws_acm_certificate" "_" {
-  count = var.create_acm_certificate ? 1 : 0
+  count                     = var.create_acm_certificate ? 1 : 0
   domain_name               = var.domain
   subject_alternative_names = [join(".", ["*", var.domain])]
   tags                      = merge(local.common_tags, tomap({ DomainName = var.domain, Name = local.prefix }))

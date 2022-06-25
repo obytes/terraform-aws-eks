@@ -6,6 +6,10 @@ terraform {
       source  = "integrations/github"
       version = "4.19.1"
     }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "3.4.0"
+    }
     aws = {
       source  = "hashicorp/aws"
       version = "~>3.71"
@@ -22,6 +26,6 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region                  = var.region
   shared_credentials_file = "gtask"
 }

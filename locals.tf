@@ -97,7 +97,7 @@ locals {
       timeouts = {}
     }
   }
-  kube_config_folder    = "kubernetes/manifests/prod/"
+  kube_config_folder = "kubernetes/manifests/prod/"
   cluster_security_group_rules = {
     ingress_nodes_443 = {
       description = "Node groups to cluster API"
@@ -108,14 +108,14 @@ locals {
       self        = true
     }
     #FIXME: Add CodeBuild and CodePipeline for CI/CD process
-#    ingress_codebuild_deploy = {
-#      description                = "CodeBuild Deploy Security Group"
-#      protocol                   = "tcp"
-#      from_port                  = 0
-#      to_port                    = 65535
-#      type                       = "ingress"
-#      source_node_security_group = module.codebuild_cd.codebuild_sg_id
-#    }
+    #    ingress_codebuild_deploy = {
+    #      description                = "CodeBuild Deploy Security Group"
+    #      protocol                   = "tcp"
+    #      from_port                  = 0
+    #      to_port                    = 65535
+    #      type                       = "ingress"
+    #      source_node_security_group = module.codebuild_cd.codebuild_sg_id
+    #    }
     egress_nodes_443 = {
       description = "Cluster API to node groups"
       protocol    = "tcp"
