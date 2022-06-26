@@ -99,3 +99,8 @@ variable "cluster_ip_family" {
   description = "The IP type of EKS Cluster"
   default     = "ipv4"
 }
+
+variable "profile_name" {
+  type        = string
+  description = "AWS Credentials profile name"
+}

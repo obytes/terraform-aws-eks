@@ -27,5 +27,5 @@ terraform {
 
 provider "aws" {
   region                  = var.region
-  shared_credentials_file = "gtask"
+  shared_credentials_file = var.profile_name
 }
