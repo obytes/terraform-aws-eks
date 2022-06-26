@@ -19,7 +19,7 @@ variable "cidr_block" {
 variable "region" {
   type        = string
   description = "AWS Region name"
-  default     = "us-east-1"
+  default     = "eu-west-1"
 }
 
 variable "enable_dns_hostnames" {
@@ -91,7 +91,7 @@ variable "create_acm_certificate" {
 variable "domain" {
   type        = string
   description = "Domain Name to issue ACM Certificate"
-  default     = "example.org"
+  default     = "obytes.com"
 }
 
 variable "cluster_ip_family" {

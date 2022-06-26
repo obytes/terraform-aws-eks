@@ -74,14 +74,6 @@ output "vpc_dhcp_dns_list" {
 }
 
 #=========#
-#   ECR   #
-#=========#
-output "ecr_repository" {
-  value       = aws_ecr_repository.this[0].repository_url
-  description = "ECR url"
-}
-
-#=========#
 #   KMS   #
 #=========#
 
