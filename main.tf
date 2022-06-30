@@ -254,6 +254,6 @@ resource "aws_security_group_rule" "cluster" {
   type                     = each.value.type
   self                     = try(each.value.self, null)
   ipv6_cidr_blocks         = try(each.value.ipv6_cidr_blocks, null)
-  source_security_group_id = try(each.value.source_node_security_group, null)
+  source_security_group_id = try(each.value.source_sg_id, null)
   cidr_blocks              = try(each.value.cidr_blocks, null)
 }
