@@ -103,3 +103,22 @@ output "acm_details" {
   }
   description = "Details about the ACM certificate for generaltask.com"
 }
+
+#=========#
+#   EKS   #
+#=========#
+
+output "eks_cluster" {
+  value = {
+    name           = aws_eks_cluster._.name
+    arn            = aws_eks_cluster._.arn
+    endpoint       = aws_eks_cluster._.endpoint
+    network_config = aws_eks_cluster._.kubernetes_network_config
+  }
+  description = "EKS Cluster information"
+}
+
+output "cluster_sg_id" {
+  value       = aws_security_group.cluster.id
+  description = "EKS Cluster security group"
+}
